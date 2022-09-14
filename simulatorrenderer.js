@@ -1,5 +1,5 @@
 var SimulatorRenderer = (function () {
-    function SimulatorRenderer (canvas, wgl, projectionMatrix, camera, gridDimensions, onLoaded) {
+    function SimulatorRenderer (threejsrenderer, canvas, wgl, projectionMatrix, camera, gridDimensions, onLoaded) {
         this.canvas = canvas;
         this.wgl = wgl;
         this.projectionMatrix = projectionMatrix;
@@ -12,12 +12,14 @@ var SimulatorRenderer = (function () {
         var rendererLoaded = false,
             simulatorLoaded = false;
 
-        this.renderer = new Renderer(this.canvas, this.wgl, gridDimensions, (function () {
-            rendererLoaded = true;  
-            if (rendererLoaded && simulatorLoaded) {
-                start.call(this);
-            }
-        }).bind(this));
+        this.renderer = new Renderer(threejsrenderer);
+        rendererLoaded = true;
+        // this.canvas, this.wgl, gridDimensions, (function () {
+        //     rendererLoaded = true;  
+        //     if (rendererLoaded && simulatorLoaded) {
+        //         start.call(this);
+        //     }
+        // }).bind(this));
 
         this.simulator = new Simulator(this.wgl, (function () {
             simulatorLoaded = true;
@@ -108,7 +110,7 @@ var SimulatorRenderer = (function () {
     }
 
     SimulatorRenderer.prototype.onResize = function (event) {
-        this.renderer.onResize(event);
+        // this.renderer.onResize(event);
     }
 
     return SimulatorRenderer;

@@ -50,10 +50,11 @@ var Simulator = (function () {
         this.scalarTextureHeight = 0;
 
         
-        this.halfFloatExt = this.wgl.getExtension('OES_texture_half_float');
-        this.wgl.getExtension('OES_texture_half_float_linear');
+        // this.halfFloatExt = this.wgl.getExtension('OES_texture_half_float');
+        // this.wgl.getExtension('OES_texture_half_float_linear');
 
-        this.simulationNumberType = this.halfFloatExt.HALF_FLOAT_OES;
+        // this.simulationNumberType = this.halfFloatExt.HALF_FLOAT_OES;
+        this.simulationNumberType = this.wgl.gl.HALF_FLOAT
 
 
         ///////////////////////////////////////////////////////
@@ -235,6 +236,8 @@ var Simulator = (function () {
             particleRandoms[i * 4 + 2] = u;
             particleRandoms[i * 4 + 3] = 0.0;
         }
+
+        console.log(particlePositionsData); 
 
         wgl.rebuildTexture(this.particlePositionTexture, wgl.RGBA, wgl.FLOAT, this.particlesWidth, this.particlesHeight, particlePositionsData, wgl.CLAMP_TO_EDGE, wgl.CLAMP_TO_EDGE, wgl.NEAREST, wgl.NEAREST);
         wgl.rebuildTexture(this.particlePositionTextureTemp, wgl.RGBA, wgl.FLOAT, this.particlesWidth, this.particlesHeight, null, wgl.CLAMP_TO_EDGE, wgl.CLAMP_TO_EDGE, wgl.NEAREST, wgl.NEAREST);
